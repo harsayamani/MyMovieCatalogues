@@ -84,7 +84,7 @@ public class MoviesFragment extends Fragment {
         inflater.inflate(R.menu.search, menu);
         MenuItem item = menu.findItem(R.id.search);
         SearchView searchView = new SearchView(getContext());
-        searchView.setQueryHint("Search Movie...");
+        searchView.setQueryHint(getString(R.string.search_movie));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

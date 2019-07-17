@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Katalog Filmku</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hai Potongan Kosong</string>
+    <string name="catalogues">Katalog</string>
+    <string name="details_movie">Detail Film</string>
+    <string name="details_tv_show">Detail Acara TV</string>
+    <string name="tv_show">Acara TV</string>
+    <string name="movies">Film</string>
+    <string name="title_movie">Judul</string>
+    <string name="category_movie">Kategori</string>
+    <string name="year_movie">Tahun</string>
+    <string name="metascore">Skor Meta</string>
+    <string name="synopsis_movie">Sinopsis</string>
+    <string name="title_tv">Judul</string>
+    <string name="category_tv">Kategori</string>
+    <string name="year_tv">Tahun</string>
+    <string name="stars">Bintang</string>
+    <string name="synopsis_tv">Sinopsis</string>
+    <string name="my_movie_catalogues">Katalog \nFilmku</string>
+    <string name="search_tv_show">Cari Acara TV…</string>
+    <string name="search_movie">Cari Film…</string>
+</resources>

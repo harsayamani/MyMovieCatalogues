@@ -1,5 +1,7 @@
 package com.mobile.harsoft.mymoviecatalogues;
 
+import android.content.Intent;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.settings:
+            case R.id.tranlate:
+                startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
                 break;
 
         }

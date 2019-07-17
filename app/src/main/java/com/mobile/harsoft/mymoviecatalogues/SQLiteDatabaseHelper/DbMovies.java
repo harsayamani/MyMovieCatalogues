@@ -104,7 +104,7 @@ public class DbMovies extends SQLiteOpenHelper {
 
         values.put("id", "8");
         values.put("title", "How to Train Your Dragon");
-        values.put("ilustration", R.drawable.poster_dragon);
+        values.put("ilustration", R.drawable.poster_how_to_train);
         values.put("year", "2018");
         values.put("synopsis", "When Hiccup discovers Toothless isn't the only Night Fury, he must " +
                 "seek \"The Hidden World\", a secret Dragon Utopia before a hired tyrant named " +

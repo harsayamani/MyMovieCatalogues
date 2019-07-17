@@ -13,12 +13,12 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
-            android:label="Catalogues" />
+            android:label="@string/catalogues" />
         <activity
             android:name=".DetailMovieActivity"
-            android:label="Detail Movie"
+            android:label="@string/details_movie"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme2"/>
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -29,6 +29,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChangeLanguageActivity" />
+        <activity android:name=".DetailTvShowActivity"
+            android:label="@string/details_tv_show"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme2"/>
     </application>
 
 </manifest>

@@ -13,9 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="true"
-        android:text="My Movie\nCatalogues"
-        android:textColor="#fff"
-        tools:ignore="HardcodedText" />
+        android:text="@string/my_movie_catalogues"
+        android:textColor="#fff"/>
     <ImageView
         android:layout_above="@+id/text5"
         android:layout_width="125dp"

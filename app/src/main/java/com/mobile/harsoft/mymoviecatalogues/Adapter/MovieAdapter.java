@@ -14,6 +14,8 @@ import com.mobile.harsoft.mymoviecatalogues.R;
 
 import java.util.ArrayList;
 
+
+//Submission 1
 public class MovieAdapter extends BaseAdapter {
 
     private Context context;
@@ -46,7 +48,7 @@ public class MovieAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.design_list_movie, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.design_movie, parent, false);
         }
 
         ViewHolder viewHolder = new ViewHolder(convertView);

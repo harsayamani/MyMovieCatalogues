@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pager"
-        android:layout_below="@id/appbar" />
+        android:layout_below="@id/appbar"
+        android:layout_above="@+id/tab_layout"/>
     
     <android.support.design.widget.TabLayout
         android:layout_alignParentBottom="true"
@@ -49,17 +50,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tab_movies"
-            android:text="Movies"
-            android:icon="@drawable/clapperboard"
-            tools:ignore="HardcodedText"/>
+            android:text="@string/movies"
+            android:icon="@drawable/clapperboard" />
 
         <android.support.design.widget.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tab_tvshow"
             android:icon="@drawable/live"
-            android:text="TV Show"
-            tools:ignore="HardcodedText"/>
+            android:text="@string/tv_show" />
         
     </android.support.design.widget.TabLayout>
 

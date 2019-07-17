@@ -6,11 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailMovieActivity"
+    android:scrollbars="vertical"
     android:background="#2b2b2b">
 
     <GridLayout
-        android:padding="20dp"
         android:id="@+id/grid1"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="UselessParent">
@@ -33,7 +34,7 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_movie"
+                android:text="@string/title_tv"
                 android:textSize="15sp"
                 android:textColor="#9f9f9f" />
             <TextView
@@ -52,9 +53,9 @@
                 android:layout_below="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/category_movie"
+                android:text="@string/category_tv"
                 android:textSize="15sp"
-                android:textColor="#9f9f9f"/>
+                android:textColor="#9f9f9f" />
             <TextView
                 android:id="@+id/category"
                 android:layout_marginBottom="10dp"
@@ -71,9 +72,9 @@
                 android:layout_below="@+id/category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/year_movie"
+                android:text="@string/year_tv"
                 android:textSize="15sp"
-                android:textColor="#9f9f9f"/>
+                android:textColor="#9f9f9f" />
             <TextView
                 android:id="@+id/year"
                 android:fontFamily="casual"
@@ -86,75 +87,85 @@
                 tools:ignore="HardcodedText" />
         </RelativeLayout>
     </GridLayout>
-    <android.support.v7.widget.CardView
-        android:id="@+id/card1"
+
+    <GridLayout
+        android:id="@+id/grid2"
         app:layout_constraintTop_toBottomOf="@id/grid1"
-        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="25dp">
-        <GridLayout
-            android:background="#3c3f41"
-            android:layout_width="match_parent"
+        android:layout_margin="20dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numColumns="2">
-            <RelativeLayout
-                android:layout_width="160dp"
+            tools:ignore="UselessParent">
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="16dp"
+                android:text="@string/stars"
+                android:textColor="#9f9f9f"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/stars"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:text="Anna, Sowa"
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:layout_below="@id/text5"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="20dp" />
+        </RelativeLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/grid1"
+            android:layout_marginStart="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#3c3f41"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
                 <ImageView
                     android:id="@+id/img1"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
                     android:src="@drawable/star"
                     tools:ignore="ContentDescription" />
+
                 <TextView
                     android:id="@+id/rate"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/img1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:layout_below="@+id/img1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
                     android:text="8,5/10"
                     android:textColor="#fff"
-                    tools:ignore="HardcodedText" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/metascore"
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#07b105"
-                    android:textSize="17sp"
-                    android:textColor="#fff"
-                    android:padding="9dp"
-                    android:text="84"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:layout_margin="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/metascore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="@string/metascore"
-                    android:textColor="#fff"/>
+                    tools:ignore="HardcodedText" />
             </RelativeLayout>
-        </GridLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </GridLayout>
+
     <android.support.v7.widget.CardView
-        app:layout_constraintTop_toBottomOf="@id/card1"
+        app:layout_constraintTop_toBottomOf="@id/grid2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="12dp">
         <RelativeLayout
             android:background="#3c3f41"
@@ -165,7 +176,7 @@
                 android:id="@+id/text4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/synopsis_movie"
+                android:text="@string/synopsis_tv"
                 android:textSize="15sp"
                 android:textColor="#9f9f9f" />
             <TextView
@@ -180,5 +191,4 @@
                 tools:ignore="HardcodedText" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
 </android.support.constraint.ConstraintLayout>
