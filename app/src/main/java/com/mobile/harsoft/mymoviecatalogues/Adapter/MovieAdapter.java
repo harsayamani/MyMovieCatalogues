@@ -21,13 +21,13 @@ public class MovieAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Movie> movies;
 
-    public void setMovies(ArrayList<Movie> movies){
-        this.movies = movies;
-    }
-
-    public MovieAdapter(Context context){
+    public MovieAdapter(Context context) {
         this.context = context;
         movies = new ArrayList<>();
+    }
+
+    public void setMovies(ArrayList<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null){
+        if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.design_movie, parent, false);
         }
 
@@ -64,19 +64,19 @@ public class MovieAdapter extends BaseAdapter {
         private TextView tvRate;
         private ImageView ivIlustration;
 
-        ViewHolder(View view){
+        ViewHolder(View view) {
             tvTitle = view.findViewById(R.id.title_movie);
-            tvRate = view.findViewById(R.id.rate_movie);
-            tvCategory = view.findViewById(R.id.category_movie);
-            ivIlustration = view.findViewById(R.id.ilust_movie);
+            tvRate = view.findViewById(R.id.vote_average_movie);
+            tvCategory = view.findViewById(R.id.popularity_movie);
+            ivIlustration = view.findViewById(R.id.iposter_path_movie);
         }
 
         @SuppressLint("SetTextI18n")
-        void bind(Movie movie){
-            tvTitle.setText(movie.getTitle());
-            tvCategory.setText(movie.getCategory());
-            tvRate.setText(String.valueOf(movie.getRate())+"/10");
-            ivIlustration.setImageResource(movie.getIlustration());
+        void bind(Movie movie) {
+//            tvTitle.setText(movie.getTitle());
+//            tvCategory.setText(movie.getCategory());
+//            tvRate.setText(movie.getRate() + "/10");
+//            ivIlustration.setImageResource(movie.getIlustration());
         }
     }
 }

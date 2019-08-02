@@ -1,36 +1,72 @@
 package com.mobile.harsoft.mymoviecatalogues;
 
 import android.content.Intent;
-import android.provider.Settings;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import com.mobile.harsoft.mymoviecatalogues.Adapter.PagerAdapter;
+
+import com.mobile.harsoft.mymoviecatalogues.Fragments.MoviesFragment;
+import com.mobile.harsoft.mymoviecatalogues.Fragments.TVShowFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-//Submission 1
-//    private ListView listView;
-//    private ArrayList<Movie> movies;
-//    private MovieAdapter adapter;
-//    private DbMovies dbMovies;
+    private MoviesFragment moviesFragment;
+    private TVShowFragment tvShowFragment;
+    private int navTab = 1;
+    private FragmentManager fragmentManager;
+    private BottomNavigationView navigation;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment = null;
+            switch (item.getItemId()) {
+                case R.id.movie:
+                    setTitle(R.string.movies);
+                    fragment = new MoviesFragment();
+                    navTab = 1;
+                    break;
+                case R.id.tvshow:
+                    setTitle(R.string.tv_show);
+                    fragment = new TVShowFragment();
+                    navTab = 2;
+                    break;
+            }
+            loadFragment();
+            return true;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prepareView();
-        tabLayout();
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        tabLayout();
+        if (savedInstanceState != null) {
+            Fragment fragment = getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+            if (fragment instanceof MoviesFragment) {
+                moviesFragment = (MoviesFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+                navTab = 1;
+            } else if (fragment instanceof TVShowFragment) {
+                tvShowFragment = (TVShowFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+                navTab = 2;
+            }
+        }
+        loadFragment();
 
-//Submission 1
-//        addItem();
-//        parsingItem();
     }
 
     @Override
@@ -42,89 +78,71 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.tranlate:
-                startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
-                break;
-
+        if (item.getItemId() == R.id.tranlate) {
+            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        switch (navTab) {
+            case 1:
+                getSupportFragmentManager().putFragment(outState, "fragment", moviesFragment);
+                break;
+            case 2:
+                getSupportFragmentManager().putFragment(outState, "fragment", tvShowFragment);
+                break;
+        }
     }
 
     private void prepareView() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        moviesFragment = new MoviesFragment();
+        tvShowFragment = new TVShowFragment();
+        fragmentManager = getSupportFragmentManager();
+        navigation = findViewById(R.id.navigation);
 
-//Submission 1
-//        listView = findViewById(R.id.list_movie);
-//        movies = new ArrayList<>();
-//        adapter = new MovieAdapter(this);
-//        dbMovies = new DbMovies(this);
     }
 
-    private void tabLayout() {
-        final ViewPager viewPager = findViewById(R.id.pager);
-        final TabLayout tabLayout = findViewById(R.id.tab_layout);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        PagerAdapter pagerAdapter = new PagerAdapter(fragmentManager, tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    private void loadFragment() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        switch (navTab) {
+            case 1:
+                fragmentTransaction.replace(R.id.fl_container, moviesFragment, MoviesFragment.class.getSimpleName());
+                break;
+            case 2:
+                fragmentTransaction.replace(R.id.fl_container, tvShowFragment, TVShowFragment.class.getSimpleName());
+        }
+        fragmentTransaction.commit();
     }
 
-//Submission 1
-//    private void parsingItem() {
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//    private void tabLayout() {
+//        final ViewPager viewPager = findViewById(R.id.pager);
+//        final TabLayout tabLayout = findViewById(R.id.tab_layout);
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        PagerAdapter pagerAdapter = new PagerAdapter(fragmentManager, tabLayout.getTabCount());
+//        viewPager.setAdapter(pagerAdapter);
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Movie movie = new Movie();
-//                movie.setTitle(movies.get(position).getTitle());
-//                movie.setIlustration(movies.get(position).getIlustration());
-//                movie.setCategory(movies.get(position).getCategory());
-//                movie.setYear(movies.get(position).getYear());
-//                movie.setSynopsis(movies.get(position).getSynopsis());
-//                movie.setRate(movies.get(position).getRate());
-//                movie.setMetascore(movies.get(position).getMetascore());
-//                Intent intent = new Intent(MainActivity.this, DetailMovieActivity.class);
-//                intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie);
-//                startActivity(intent);
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
 //            }
 //        });
 //    }
 
-// Submission 1
-//    private void addItem() {
-//        SQLiteDatabase readData = dbMovies.getReadableDatabase();
-//        @SuppressLint("Recycle") Cursor cursor = readData.rawQuery("select * from tb_movie", null);
-//        cursor.moveToFirst();
-//        for (int i=0; i<cursor.getCount(); i++){
-//            cursor.moveToPosition(i);
-//            Movie movie = new Movie();
-//            movie.setTitle(cursor.getString(1));
-//            movie.setIlustration(cursor.getInt(2));
-//            movie.setYear(cursor.getString(3));
-//            movie.setCategory(cursor.getString(5));
-//            movie.setSynopsis(cursor.getString(4));
-//            movie.setRate(cursor.getDouble(6));
-//            movie.setMetascore(cursor.getDouble(7));
-//            movies.add(movie);
-//        }
-//        adapter.setMovies(movies);
-//        listView.setAdapter(adapter);
-//    }
+
 }

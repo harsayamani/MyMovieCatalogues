@@ -3,23 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".SplashScreen">
+
     <TextView
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
         android:id="@+id/text5"
-        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAllCaps="true"
-        android:text="@string/my_movie_catalogues"
-        android:textColor="#fff"/>
-    <ImageView
-        android:layout_above="@+id/text5"
-        android:layout_width="125dp"
         android:layout_centerInParent="true"
+        android:text="@string/my_movie_catalogues"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="125dp"
         android:layout_height="125dp"
+        android:layout_above="@+id/text5"
+        android:layout_centerInParent="true"
         android:src="@drawable/video_player"
         tools:ignore="ContentDescription" />
 

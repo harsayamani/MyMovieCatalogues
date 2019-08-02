@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraint2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#2b2b2b">
+    android:layout_margin="5dp">
 
     <android.support.v7.widget.CardView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        app:cardCornerRadius="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:background="#3c3f41"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#3c3f41">
+
             <ImageView
-                android:id="@+id/ilust_show"
+                android:id="@+id/poster_path_show"
                 android:layout_width="75dp"
                 android:layout_height="100dp"
-                android:src="@drawable/poster_aquaman"
+                android:background="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
+
             <TextView
-                android:id="@+id/title_show"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="100dp"
-                android:layout_width="150dp"
+                android:id="@+id/name_show"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:textAllCaps="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="casual"
+                android:text="@string/aquaman_the_litle_mermaid"
+                android:textAllCaps="true"
+                android:textColor="#fff"
                 android:textSize="15sp"
-                android:text="AQUAMAN The litle mermaid"
-                android:layout_marginStart="100dp"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/poster_path_show"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/category_show"
-                android:textSize="10sp"
-                android:textStyle="italic"
-                android:textColor="#c1c1c1"
-                android:layout_marginLeft="100dp"
-                android:layout_below="@+id/title_show"
+                android:id="@+id/country_show"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:text="Action, Blockbuster"
-                android:layout_marginStart="100dp"
-                tools:ignore="HardcodedText,SmallSp" />
-            <TextView
-                android:id="@+id/star_show"
+                android:layout_below="@+id/name_show"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:textSize="10sp"
-                android:text="Stars:"
-                android:layout_marginLeft="100dp"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/category_show"
-                tools:ignore="HardcodedText,RtlHardcoded,SmallSp" />
-        </RelativeLayout>
+                android:text="@string/action_blockbuster"
+                android:textColor="#c1c1c1"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@id/poster_path_show"
+                app:layout_constraintTop_toBottomOf="@id/name_show"
+                tools:ignore="SmallSp" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
