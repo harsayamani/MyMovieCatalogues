@@ -1,11 +1,11 @@
-package com.mobile.harsoft.mymoviecatalogues.Adapter;
+package com.mobile.harsoft.mymoviecatalogues.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.mobile.harsoft.mymoviecatalogues.Fragments.MoviesFragment;
-import com.mobile.harsoft.mymoviecatalogues.Fragments.TVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.MoviesFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.TVShowFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 

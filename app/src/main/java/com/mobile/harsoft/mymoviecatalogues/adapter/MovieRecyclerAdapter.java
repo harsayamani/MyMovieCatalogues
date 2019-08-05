@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.Adapter;
+package com.mobile.harsoft.mymoviecatalogues.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.DataClass.Movie;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
 import com.mobile.harsoft.mymoviecatalogues.DetailMovieActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 
 import java.io.InputStream;
 import java.net.URL;

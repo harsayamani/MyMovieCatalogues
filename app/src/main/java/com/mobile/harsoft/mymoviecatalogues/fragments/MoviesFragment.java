@@ -1,11 +1,13 @@
-package com.mobile.harsoft.mymoviecatalogues.Fragments;
+package com.mobile.harsoft.mymoviecatalogues.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,12 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.Adapter.MovieRecyclerAdapter;
-import com.mobile.harsoft.mymoviecatalogues.DataClass.Movie;
+import com.mobile.harsoft.mymoviecatalogues.adapter.MovieRecyclerAdapter;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.Response.ResultMovie;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.APIClient;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultMovie;
+import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
+import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +44,7 @@ public class MoviesFragment extends Fragment {
     private ArrayList<Movie> movies;
     private RecyclerView recyclerView;
     private Context context;
+    private SwipeRefreshLayout refreshLayout;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -61,6 +64,7 @@ public class MoviesFragment extends Fragment {
         setHasOptionsMenu(true);
         context = getContext();
         recyclerView = view.findViewById(R.id.recycler1);
+        refreshLayout = view.findViewById(R.id.refresh);
         layoutManager(recyclerView);
 
         if (savedInstanceState != null) {
@@ -68,9 +72,47 @@ public class MoviesFragment extends Fragment {
             adapter = new MovieRecyclerAdapter(movies, context);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            refresh();
         } else {
             getData();
+            refresh();
         }
+    }
+
+    private void refresh() {
+        refreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                        Call<ResultMovie> call = APIClient.getInstance()
+                                .baseAPI()
+                                .getUpcomingMovie(BuildConfig.API_KEY, BuildConfig.LANGUAGE, 1);
+
+                        call.enqueue(new Callback<ResultMovie>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResultMovie> call, @NonNull Response<ResultMovie> response) {
+                                resultMovie = response.body();
+                                assert resultMovie != null;
+                                movies = new ArrayList<>(Arrays.asList(resultMovie.getMovies()));
+                                adapter = new MovieRecyclerAdapter(movies, context);
+                                recyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResultMovie> call, @NonNull Throwable t) {
+                                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
+                                Log.e("Error : ", t.toString());
+                            }
+                        });
+                    }
+                }, 2000);
+            }
+        });
     }
 
     private void getData() {
@@ -87,7 +129,6 @@ public class MoviesFragment extends Fragment {
         call.enqueue(new Callback<ResultMovie>() {
             @Override
             public void onResponse(@NonNull Call<ResultMovie> call, @NonNull Response<ResultMovie> response) {
-
                 resultMovie = response.body();
                 assert resultMovie != null;
                 movies = new ArrayList<>(Arrays.asList(resultMovie.getMovies()));
@@ -100,7 +141,7 @@ public class MoviesFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<ResultMovie> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
                 Log.e("Error : ", t.toString());
             }
         });

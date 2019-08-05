@@ -1,12 +1,14 @@
-package com.mobile.harsoft.mymoviecatalogues.Fragments;
+package com.mobile.harsoft.mymoviecatalogues.fragments;
 
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -19,12 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.Adapter.TvShowRecyclerAdapter;
-import com.mobile.harsoft.mymoviecatalogues.DataClass.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowRecyclerAdapter;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.Response.ResultTV;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.APIClient;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultTV;
+import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
+import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +45,7 @@ public class TVShowFragment extends Fragment {
     private RecyclerView recyclerView;
     private ResultTV resultTV;
     private Context context;
+    private SwipeRefreshLayout refreshLayout;
 
     public TVShowFragment() {
         // Required empty public constructor
@@ -63,6 +66,7 @@ public class TVShowFragment extends Fragment {
         setHasOptionsMenu(true);
         context = getContext();
         recyclerView = view.findViewById(R.id.recycler2);
+        refreshLayout = view.findViewById(R.id.refresh);
         layoutManager(recyclerView);
 
         if (savedInstanceState != null) {
@@ -70,9 +74,47 @@ public class TVShowFragment extends Fragment {
             adapter = new TvShowRecyclerAdapter(tvShows, context);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            refresh();
         } else {
             getData();
+            refresh();
         }
+    }
+
+    private void refresh() {
+        refreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                        Call<ResultTV> call = APIClient.getInstance()
+                                .baseAPI()
+                                .getTvAiringToday(BuildConfig.API_KEY, BuildConfig.LANGUAGE, 1);
+
+                        call.enqueue(new Callback<ResultTV>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResultTV> call, @NonNull Response<ResultTV> response) {
+                                resultTV = response.body();
+                                assert resultTV != null;
+                                tvShows = new ArrayList<>(Arrays.asList(resultTV.getTvShows()));
+                                adapter = new TvShowRecyclerAdapter(tvShows, getContext());
+                                recyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResultTV> call, @NonNull Throwable t) {
+                                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
+                                Log.e("Error : ", t.toString());
+                            }
+                        });
+                    }
+                }, 2000);
+            }
+        });
     }
 
     private void getData() {
@@ -101,7 +143,7 @@ public class TVShowFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<ResultTV> call, @NonNull Throwable t) {
-                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
                 Log.e("Error : ", t.toString());
                 progressDialog.dismiss();
             }

@@ -11,8 +11,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.DataClass.TvShow;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 
 import java.io.InputStream;
 import java.net.URL;

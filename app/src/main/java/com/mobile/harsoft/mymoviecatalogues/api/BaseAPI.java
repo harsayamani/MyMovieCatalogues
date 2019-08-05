@@ -1,7 +1,7 @@
-package com.mobile.harsoft.mymoviecatalogues.RestAPI;
+package com.mobile.harsoft.mymoviecatalogues.api;
 
-import com.mobile.harsoft.mymoviecatalogues.Response.ResultMovie;
-import com.mobile.harsoft.mymoviecatalogues.Response.ResultTV;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultMovie;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultTV;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

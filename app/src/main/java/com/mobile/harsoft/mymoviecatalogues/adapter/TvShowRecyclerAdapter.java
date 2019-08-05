@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.Adapter;
+package com.mobile.harsoft.mymoviecatalogues.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.DataClass.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
 import com.mobile.harsoft.mymoviecatalogues.DetailTvShowActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.RestAPI.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 
 import java.io.InputStream;
 import java.net.URL;

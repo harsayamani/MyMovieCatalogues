@@ -11,7 +11,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.DataClass.Movie;
+import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
 
 import java.io.InputStream;
 import java.net.URL;

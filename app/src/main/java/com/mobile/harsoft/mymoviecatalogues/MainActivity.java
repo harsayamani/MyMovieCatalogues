@@ -14,8 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.mobile.harsoft.mymoviecatalogues.Fragments.MoviesFragment;
-import com.mobile.harsoft.mymoviecatalogues.Fragments.TVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.MoviesFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.TVShowFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,15 +55,19 @@ public class MainActivity extends AppCompatActivity {
         prepareView();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 //        tabLayout();
+
         if (savedInstanceState != null) {
             Fragment fragment = getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
             if (fragment instanceof MoviesFragment) {
+                setTitle(R.string.movies);
                 moviesFragment = (MoviesFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 1;
             } else if (fragment instanceof TVShowFragment) {
+                setTitle(R.string.tv_show);
                 tvShowFragment = (TVShowFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 2;
             }
+
         }
         loadFragment();
 

@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.DataClass;
+package com.mobile.harsoft.mymoviecatalogues.datamodel;
 
 import android.os.Parcel;
 import android.os.Parcelable;

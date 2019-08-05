@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.RestAPI;
+package com.mobile.harsoft.mymoviecatalogues.api;
 
 public final class BuildConfig {
     public static final String API_KEY = "b790a953494065f9a95eac03708eb7e9";

@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.RestAPI;
+package com.mobile.harsoft.mymoviecatalogues.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
