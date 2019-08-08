@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.fragments;
+package com.mobile.harsoft.mymoviecatalogues.fragments.movies;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,12 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.adapter.MovieRecyclerAdapter;
-import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.response.ResultMovie;
+import com.mobile.harsoft.mymoviecatalogues.adapter.MovieRecyclerAdapter;
 import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
 import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.model.Movie;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultMovie;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoviesFragment extends Fragment {
+public class UpcomingMoviesFragment extends Fragment {
 
     private MovieRecyclerAdapter adapter;
     private ResultMovie resultMovie;
@@ -46,7 +46,7 @@ public class MoviesFragment extends Fragment {
     private Context context;
     private SwipeRefreshLayout refreshLayout;
 
-    public MoviesFragment() {
+    public UpcomingMoviesFragment() {
         // Required empty public constructor
     }
 
@@ -55,7 +55,7 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movies, container, false);
+        return inflater.inflate(R.layout.fragment_upcoming_movies, container, false);
     }
 
     @Override
@@ -72,11 +72,10 @@ public class MoviesFragment extends Fragment {
             adapter = new MovieRecyclerAdapter(movies, context);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            refresh();
         } else {
             getData();
-            refresh();
         }
+        refresh();
     }
 
     private void refresh() {
@@ -105,7 +104,7 @@ public class MoviesFragment extends Fragment {
 
                             @Override
                             public void onFailure(@NonNull Call<ResultMovie> call, @NonNull Throwable t) {
-                                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
                                 Log.e("Error : ", t.toString());
                             }
                         });
@@ -119,7 +118,7 @@ public class MoviesFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle(R.string.movie_catalogues);
         progressDialog.setIcon(R.drawable.ic_movie_white_24dp);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
         Call<ResultMovie> call = APIClient.getInstance()
@@ -141,7 +140,7 @@ public class MoviesFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<ResultMovie> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
                 Log.e("Error : ", t.toString());
             }
         });

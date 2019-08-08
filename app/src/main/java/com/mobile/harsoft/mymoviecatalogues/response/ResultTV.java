@@ -1,6 +1,6 @@
 package com.mobile.harsoft.mymoviecatalogues.response;
 
-import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
 
 public class ResultTV {
     private TvShow[] results;

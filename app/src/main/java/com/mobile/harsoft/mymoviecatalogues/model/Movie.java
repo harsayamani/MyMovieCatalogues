@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.datamodel;
+package com.mobile.harsoft.mymoviecatalogues.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -18,6 +18,7 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+    private int id;
     private String title;
     private String overview;
     private String poster_path;
@@ -31,6 +32,7 @@ public class Movie implements Parcelable {
     }
 
     private Movie(Parcel in) {
+        this.id = in.readInt();
         this.title = in.readString();
         this.overview = in.readString();
         this.poster_path = in.readString();
@@ -39,6 +41,14 @@ public class Movie implements Parcelable {
         this.vote_count = in.readInt();
         this.genre_ids = in.createIntArray();
         this.popularity = in.readDouble();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getPopularity() {
@@ -112,6 +122,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.title);
         dest.writeString(this.overview);
         dest.writeString(this.poster_path);

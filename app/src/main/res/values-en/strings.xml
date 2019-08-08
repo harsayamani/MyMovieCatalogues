@@ -29,4 +29,15 @@
     <string name="first_air_date">First Air Date</string>
     <string name="origin_country">Origin Country</string>
     <string name="overview">Overview</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="favourite_lists">Favorite List</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="favorite">Favorite</string>
+    <string name="message_add_favorite">Add to Favorite List</string>
+    <string name="message_delete_favorite">Delete form Favorite List</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="exit_message">You want to exit, are you sure?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

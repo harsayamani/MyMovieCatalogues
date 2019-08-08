@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.fragments;
+package com.mobile.harsoft.mymoviecatalogues.fragments.tvshows;
 
 
 import android.app.ProgressDialog;
@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowRecyclerAdapter;
-import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.response.ResultTV;
 import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
@@ -38,7 +38,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TVShowFragment extends Fragment {
+public class TVAiringTodayFragment extends Fragment {
 
     private TvShowRecyclerAdapter adapter;
     private ArrayList<TvShow> tvShows;
@@ -47,7 +47,7 @@ public class TVShowFragment extends Fragment {
     private Context context;
     private SwipeRefreshLayout refreshLayout;
 
-    public TVShowFragment() {
+    public TVAiringTodayFragment() {
         // Required empty public constructor
     }
 
@@ -57,7 +57,7 @@ public class TVShowFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tvshow, container, false);
+        return inflater.inflate(R.layout.fragment_tv_airing_today, container, false);
     }
 
     @Override
@@ -74,11 +74,10 @@ public class TVShowFragment extends Fragment {
             adapter = new TvShowRecyclerAdapter(tvShows, context);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            refresh();
         } else {
             getData();
-            refresh();
         }
+        refresh();
     }
 
     private void refresh() {
@@ -121,7 +120,7 @@ public class TVShowFragment extends Fragment {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle(R.string.tv_show_catalogues);
         progressDialog.setIcon(R.drawable.ic_live_tv_white_24dp);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -143,7 +142,7 @@ public class TVShowFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<ResultTV> call, @NonNull Throwable t) {
-                Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
                 Log.e("Error : ", t.toString());
                 progressDialog.dismiss();
             }

@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.datamodel.TvShow;
 import com.mobile.harsoft.mymoviecatalogues.DetailTvShowActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -47,13 +47,13 @@ public class TvShowRecyclerAdapter extends RecyclerView.Adapter<TvShowRecyclerAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String name = tvShows.get(i).getName();
         String[] origin_country = tvShows.get(i).getOrigin_country();
-        String poster_path = BuildConfig.IMG_URL + tvShows.get(i).getPoster_path();
+        String poster_path = tvShows.get(i).getPoster_path();
         StringBuilder country = new StringBuilder();
         for (String s : origin_country) {
             country.append(s).append(" ");
         }
 
-        new DownloadImage(viewHolder.posterPathShow).execute(poster_path);
+        new DownloadImage(viewHolder.posterPathShow).execute(BuildConfig.IMG_URL+poster_path);
         viewHolder.nameShow.setText(name);
         viewHolder.originCountryShow.setText(country.toString());
 
@@ -114,6 +114,7 @@ public class TvShowRecyclerAdapter extends RecyclerView.Adapter<TvShowRecyclerAd
                 @Override
                 public void onClick(View v) {
                     TvShow tvShow = new TvShow();
+                    tvShow.setId(tvShows.get(getAdapterPosition()).getId());
                     tvShow.setName(tvShows.get(getAdapterPosition()).getName());
                     tvShow.setFirst_air_date(tvShows.get(getAdapterPosition()).getFirst_air_date());
                     tvShow.setOrigin_country(tvShows.get(getAdapterPosition()).getOrigin_country());

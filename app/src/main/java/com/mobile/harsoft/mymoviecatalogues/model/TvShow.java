@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.datamodel;
+package com.mobile.harsoft.mymoviecatalogues.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,6 +16,7 @@ public class TvShow implements Parcelable {
             return new TvShow[size];
         }
     };
+    private int id;
     private String name;
     private String[] origin_country;
     private String overview;
@@ -28,6 +29,7 @@ public class TvShow implements Parcelable {
     }
 
     private TvShow(Parcel in) {
+        this.id = in.readInt();
         this.name = in.readString();
         this.origin_country = in.createStringArray();
         this.overview = in.readString();
@@ -35,6 +37,14 @@ public class TvShow implements Parcelable {
         this.first_air_date = in.readString();
         this.popularity = in.readDouble();
         this.vote_average = in.readDouble();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getPopularity() {
@@ -100,6 +110,7 @@ public class TvShow implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeStringArray(this.origin_country);
         dest.writeString(this.overview);

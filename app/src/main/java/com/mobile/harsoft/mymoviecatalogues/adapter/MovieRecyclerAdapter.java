@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
+import com.mobile.harsoft.mymoviecatalogues.model.Movie;
 import com.mobile.harsoft.mymoviecatalogues.DetailMovieActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
@@ -50,10 +50,10 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
 
         String title = movies.get(i).getTitle();
         double popularity = movies.get(i).getPopularity();
-        String poster_path = BuildConfig.IMG_URL + movies.get(i).getPoster_path();
+        String poster_path = movies.get(i).getPoster_path();
         double vote_average = movies.get(i).getVote_average();
 
-        new DownloadImage(viewHolder.ilustMovie).execute(poster_path);
+        new DownloadImage(viewHolder.ilustMovie).execute(BuildConfig.IMG_URL+poster_path);
         viewHolder.titleMovie.setText(title);
         viewHolder.rateMovie.setText(vote_average + "");
         viewHolder.popularityMovie.setText(popularity + "");
@@ -107,16 +107,17 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
             titleMovie = itemView.findViewById(R.id.title_movie);
             popularityMovie = itemView.findViewById(R.id.popularity_movie);
             rateMovie = itemView.findViewById(R.id.vote_average_movie);
-            ilustMovie = itemView.findViewById(R.id.iposter_path_movie);
+            ilustMovie = itemView.findViewById(R.id.poster_path_movie);
             constraintLayout = itemView.findViewById(R.id.list_movie);
 
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Movie movie = new Movie();
+                    movie.setId(movies.get(getAdapterPosition()).getId());
                     movie.setTitle(movies.get(getAdapterPosition()).getTitle());
                     movie.setOverview(movies.get(getAdapterPosition()).getOverview());
-                    movie.setPoster_path(BuildConfig.IMG_URL + movies.get(getAdapterPosition()).getPoster_path());
+                    movie.setPoster_path(movies.get(getAdapterPosition()).getPoster_path());
                     movie.setRelease_date(movies.get(getAdapterPosition()).getRelease_date());
                     movie.setVote_average(movies.get(getAdapterPosition()).getVote_average());
                     movie.setVote_count(movies.get(getAdapterPosition()).getVote_count());

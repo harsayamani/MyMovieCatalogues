@@ -4,14 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.mobile.harsoft.mymoviecatalogues.fragments.MoviesFragment;
-import com.mobile.harsoft.mymoviecatalogues.fragments.TVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.tvshows.FavouriteTVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.tvshows.TVAiringTodayFragment;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class TVShowPagerAdapter extends FragmentStatePagerAdapter {
 
     private int numberTabs;
 
-    public PagerAdapter(FragmentManager fm, int numberTabs) {
+    public TVShowPagerAdapter(FragmentManager fm, int numberTabs) {
         super(fm);
         this.numberTabs = numberTabs;
     }
@@ -20,9 +20,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                return new MoviesFragment();
+                return new TVAiringTodayFragment();
             case 1:
-                return new TVShowFragment();
+                return new FavouriteTVShowFragment();
             default:
                 return null;
         }

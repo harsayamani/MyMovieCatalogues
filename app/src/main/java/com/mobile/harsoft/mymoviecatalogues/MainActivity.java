@@ -1,5 +1,6 @@
 package com.mobile.harsoft.mymoviecatalogues;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -8,14 +9,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.mobile.harsoft.mymoviecatalogues.fragments.MoviesFragment;
-import com.mobile.harsoft.mymoviecatalogues.fragments.TVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.movies.MoviesFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.tvshows.TVShowFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +35,10 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.movie:
-                    setTitle(R.string.movies);
                     fragment = new MoviesFragment();
                     navTab = 1;
                     break;
                 case R.id.tvshow:
-                    setTitle(R.string.tv_show);
                     fragment = new TVShowFragment();
                     navTab = 2;
                     break;
@@ -54,22 +54,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         prepareView();
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//        tabLayout();
 
         if (savedInstanceState != null) {
             Fragment fragment = getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
             if (fragment instanceof MoviesFragment) {
-                setTitle(R.string.movies);
                 moviesFragment = (MoviesFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 1;
             } else if (fragment instanceof TVShowFragment) {
-                setTitle(R.string.tv_show);
                 tvShowFragment = (TVShowFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 2;
             }
-
+        } else {
+            loadFragment();
         }
-        loadFragment();
 
     }
 
@@ -115,38 +112,34 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (navTab) {
             case 1:
-                fragmentTransaction.replace(R.id.fl_container, moviesFragment, MoviesFragment.class.getSimpleName());
+                fragmentTransaction.addToBackStack(null).replace(R.id.fl_container, moviesFragment, MoviesFragment.class.getSimpleName());
                 break;
             case 2:
-                fragmentTransaction.replace(R.id.fl_container, tvShowFragment, TVShowFragment.class.getSimpleName());
+                fragmentTransaction.addToBackStack(null).replace(R.id.fl_container, tvShowFragment, TVShowFragment.class.getSimpleName());
         }
         fragmentTransaction.commit();
     }
 
-//    private void tabLayout() {
-//        final ViewPager viewPager = findViewById(R.id.pager);
-//        final TabLayout tabLayout = findViewById(R.id.tab_layout);
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        PagerAdapter pagerAdapter = new PagerAdapter(fragmentManager, tabLayout.getTabCount());
-//        viewPager.setAdapter(pagerAdapter);
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
-//    }
-
-
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage(getString(R.string.exit_message));
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        alertDialog.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.setCancelable(true);
+            }
+        });
+        alertDialog.show();
+    }
 }

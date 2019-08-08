@@ -1,6 +1,6 @@
 package com.mobile.harsoft.mymoviecatalogues.response;
 
-import com.mobile.harsoft.mymoviecatalogues.datamodel.Movie;
+import com.mobile.harsoft.mymoviecatalogues.model.Movie;
 
 public class ResultMovie {
 

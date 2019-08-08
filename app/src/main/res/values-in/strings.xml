@@ -18,7 +18,7 @@
     <string name="action_blockbuster">Aksi, Blokbasterr</string>
     <string name="aquaman_the_litle_mermaid">AQUAMAN The litle mermaid</string>
     <string name="_8_4">8.4</string>
-    <string name="loading">menunggu…</string>
+    <string name="loading">memuat…</string>
     <string name="_84">84</string>
     <string name="anna_sowa">Anna, Sowa</string>
     <string name="vote">Voting</string>
@@ -29,4 +29,15 @@
     <string name="first_air_date">Tanggal Awal Tayang</string>
     <string name="origin_country">Negara Asal</string>
     <string name="overview">Cuplikan</string>
+    <string name="coming_soon">Segera Tayang</string>
+    <string name="favourite_lists">Daftar Favorit</string>
+    <string name="airing_today">Tayang Hari Ini</string>
+    <string name="unfavorite">Tidak Tidak Favorit</string>
+    <string name="favorite">Favorit</string>
+    <string name="message_add_favorite">Ditambahkan ke Daftar Favorit</string>
+    <string name="message_delete_favorite">Dihapus dari Daftar Favorit</string>
+    <string name="data_not_found">Data Tidak Ada</string>
+    <string name="exit_message">Apakah kamu yakin ingin keluar?</string>
+    <string name="yes">YA</string>
+    <string name="no">TIDAK</string>
 </resources>
