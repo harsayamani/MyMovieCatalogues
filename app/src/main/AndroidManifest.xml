@@ -31,6 +31,12 @@
                 android:resource="@xml/favorite_widget_info" />
         </receiver>
 
+        <provider
+            android:name=".provider.FavoriteMovieProvider"
+            android:authorities="com.mobile.harsoft.mymoviecatalogues"
+            android:exported="true"
+            android:readPermission="com.mobile.harsoft.mymoviecatalogues.READ_DATABASE"
+            android:writePermission="com.mobile.harsoft.mymoviecatalogues.WRITE_DATABASE" />
 
         <activity
             android:name=".SettingActivity"
@@ -72,12 +78,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <provider
-            android:name=".provider.FavoriteMovieProvider"
-            android:authorities="com.mobile.harsoft.mymoviecatalogues"
-            android:exported="true"
-            android:readPermission="com.mobile.harsoft.mymoviecatalogues.READ_DATABASE"
-            android:writePermission="com.mobile.harsoft.mymoviecatalogues.WRITE_DATABASE" />
+
     </application>
 
 </manifest>

@@ -37,6 +37,10 @@ public class Movie implements Parcelable {
     private int vote_count;
     private double popularity;
 
+    public Movie() {
+
+    }
+
     public Movie(Cursor cursor) {
         this.id = getColumnInt(cursor, ID);
         this.title = getColumnString(cursor, TITLE);

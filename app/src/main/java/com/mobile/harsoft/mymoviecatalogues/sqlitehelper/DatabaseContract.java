@@ -1,11 +1,11 @@
-package com.mobile.harsoft.mymoviecatalogues.provider;
+package com.mobile.harsoft.mymoviecatalogues.sqlitehelper;
 
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-class DatabaseContract {
-    static final String AUTHORITY = "com.mobile.harsoft.mymoviecatalogues";
+public class DatabaseContract {
+    public static final String AUTHORITY = "com.mobile.harsoft.mymoviecatalogues";
     private static final String SCHEME = "content";
 
     private DatabaseContract() {
@@ -23,12 +23,14 @@ class DatabaseContract {
         return cursor.getDouble(cursor.getColumnIndex(columnName));
     }
 
-    static final class MovieColumns implements BaseColumns {
-        static String TABLE_NAME = "tb_movie";
-        static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME)
+    public static final class MovieColumns implements BaseColumns {
+        public static String TABLE_NAME = "tb_movie";
+
+        public static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME)
                 .authority(AUTHORITY)
                 .appendPath(TABLE_NAME)
                 .build();
+
         static String ID = "id";
         static String TITLE = "title";
         static String POSTER_PATH = "poster_path";

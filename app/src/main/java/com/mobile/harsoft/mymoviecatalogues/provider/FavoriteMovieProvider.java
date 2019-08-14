@@ -8,9 +8,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import static com.mobile.harsoft.mymoviecatalogues.provider.DatabaseContract.AUTHORITY;
-import static com.mobile.harsoft.mymoviecatalogues.provider.DatabaseContract.MovieColumns.CONTENT_URI;
-import static com.mobile.harsoft.mymoviecatalogues.provider.DatabaseContract.MovieColumns.TABLE_NAME;
+import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.FavoriteMovieHelper;
+
+import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.AUTHORITY;
+import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.CONTENT_URI;
+import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.TABLE_NAME;
 
 @SuppressLint("Registered")
 public class FavoriteMovieProvider extends ContentProvider {
@@ -31,7 +33,8 @@ public class FavoriteMovieProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        favoriteMovieHelper = FavoriteMovieHelper.getInstance(getContext());
+        favoriteMovieHelper = new FavoriteMovieHelper(getContext());
+        favoriteMovieHelper.open();
         return true;
     }
 
@@ -48,6 +51,11 @@ public class FavoriteMovieProvider extends ContentProvider {
             default:
                 cursor = null;
                 break;
+        }
+
+        if (getContext() != null) {
+            assert cursor != null;
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
         return cursor;
     }
@@ -68,8 +76,9 @@ public class FavoriteMovieProvider extends ContentProvider {
             added = 0;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
-
+        if (added > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return Uri.parse(CONTENT_URI + "/" + added);
     }
 
@@ -82,8 +91,9 @@ public class FavoriteMovieProvider extends ContentProvider {
             deleted = 0;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
-
+        if (deleted > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return deleted;
     }
 
@@ -96,8 +106,9 @@ public class FavoriteMovieProvider extends ContentProvider {
             updated = 0;
         }
 
-        getContext().getContentResolver().notifyChange(CONTENT_URI, null);
-
+        if (updated > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return updated;
     }
 }

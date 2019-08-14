@@ -1,67 +1,79 @@
 package com.mobile.harsoft.favoritemovie;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.mobile.harsoft.favoritemovie.adapter.FavoriteMovieAdapter;
+import com.mobile.harsoft.favoritemovie.adapter.MovieRecyclerAdapter;
+import com.mobile.harsoft.favoritemovie.model.Movie;
+
+import java.util.ArrayList;
 
 import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.CONTENT_URI;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.ID;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.OVERVIEW;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.POPULARITY;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.POSTER_PATH;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.RELEASE_DATE;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.TITLE;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.VOTE_AVERAGE;
+import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.VOTE_COUNT;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity {
 
-    private FavoriteMovieAdapter favoriteMovieAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = findViewById(R.id.list);
         getData();
     }
 
     private void getData() {
-        ListView listView = findViewById(R.id.list_movie);
-        favoriteMovieAdapter = new FavoriteMovieAdapter(this, null, true);
-        listView.setAdapter(favoriteMovieAdapter);
-    }
+        ContentResolver resolver = getContentResolver();
+        ArrayList<Movie> movies = new ArrayList<>();
+        String[] projection = new String[]{ID, TITLE, POSTER_PATH, RELEASE_DATE, OVERVIEW, POPULARITY, VOTE_AVERAGE, VOTE_COUNT};
+        @SuppressLint("Recycle") Cursor cursor = resolver.query(CONTENT_URI, projection, null, null, null);
+        assert cursor != null;
+        cursor.moveToFirst();
 
-    @NonNull
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return new CursorLoader(this, CONTENT_URI, null, null, null, null);
-    }
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToPosition(i);
+            Movie movie = new Movie();
+            movie.setId(cursor.getInt(0));
+            movie.setTitle(cursor.getString(1));
+            movie.setPoster_path(cursor.getString(2));
+            movie.setRelease_date(cursor.getString(3));
+            movie.setOverview(cursor.getString(4));
+            movie.setPopularity(cursor.getDouble(5));
+            movie.setVote_average(cursor.getDouble(6));
+            movie.setVote_count(cursor.getInt(7));
+            movies.add(movie);
+        }
 
-    @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
-        favoriteMovieAdapter.swapCursor(cursor);
-    }
+        MovieRecyclerAdapter adapter = new MovieRecyclerAdapter(movies);
+        recyclerView.setAdapter(adapter);
 
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        favoriteMovieAdapter.swapCursor(null);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        getLoaderManager().getLoader(0).forceLoad();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportLoaderManager().restartLoader(0, null, this);
+        getData();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onRestart() {
+        super.onRestart();
+        getData();
     }
 }

@@ -12,6 +12,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "IMG_URL", '"https://image.tmdb.org/t/p/w185"'
+
 
     }
 
