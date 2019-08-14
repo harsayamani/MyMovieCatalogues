@@ -17,6 +17,8 @@ public class SettingActivity extends AppCompatActivity {
     private AppPreference appPreference;
     private DailyReminder dailyReminder;
     private ReleaseReminder releaseReminder;
+    private String time_release = "08:00";
+    private String time_daily = "07:00";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class SettingActivity extends AppCompatActivity {
                 } else if (!appPreference.getReleaseReminderMovie()) {
                     releaseSwitch.setEnabled(true);
                     appPreference.setReleaseReminderMovie(true);
-                    releaseReminder.repeatingReleaseReminder(context, ReleaseReminder.KEY_REPEATING, "08:00");
+                    releaseReminder.repeatingReleaseReminder(context, ReleaseReminder.KEY_REPEATING, time_release);
                 }
             }
         });
@@ -51,7 +53,7 @@ public class SettingActivity extends AppCompatActivity {
         if (appPreference.getDailyReminderMovie()) {
             dailySwitch.setChecked(true);
             appPreference.setDailyReminderMovie(true);
-            dailyReminder.repeatingDailyReminder(context, DailyReminder.KEY_REPEATING, "07:00", getString(R.string.daily_text));
+            dailyReminder.repeatingDailyReminder(context, DailyReminder.KEY_REPEATING, time_daily, getString(R.string.daily_text));
         } else if (!appPreference.getDailyReminderMovie()) {
             dailySwitch.setChecked(false);
             appPreference.setDailyReminderMovie(false);
@@ -61,7 +63,7 @@ public class SettingActivity extends AppCompatActivity {
         if (appPreference.getReleaseReminderMovie()) {
             releaseSwitch.setChecked(true);
             appPreference.setReleaseReminderMovie(true);
-            releaseReminder.repeatingReleaseReminder(context, ReleaseReminder.KEY_REPEATING, "08:00");
+            releaseReminder.repeatingReleaseReminder(context, ReleaseReminder.KEY_REPEATING, time_release);
         } else if (!appPreference.getReleaseReminderMovie()) {
             releaseSwitch.setChecked(false);
             appPreference.setReleaseReminderMovie(false);
@@ -87,7 +89,7 @@ public class SettingActivity extends AppCompatActivity {
                 } else if (!appPreference.getDailyReminderMovie()) {
                     dailySwitch.setEnabled(true);
                     appPreference.setDailyReminderMovie(true);
-                    dailyReminder.repeatingDailyReminder(context, DailyReminder.KEY_REPEATING, "07:00", getString(R.string.daily_text));
+                    dailyReminder.repeatingDailyReminder(context, DailyReminder.KEY_REPEATING, time_daily, getString(R.string.daily_text));
                 }
             }
         });

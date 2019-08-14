@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        app:iconifiedByDefault="false"
         app:queryHint="@string/search_movie" />
 
     <TextView
