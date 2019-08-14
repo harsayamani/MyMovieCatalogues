@@ -34,7 +34,7 @@ import java.util.ArrayList;
  */
 public class FavouriteTVShowFragment extends Fragment {
 
-    private TvShowRecyclerAdapter adapter ;
+    private TvShowRecyclerAdapter adapter;
     private ArrayList<TvShow> tvShows;
     private RecyclerView recyclerView;
     private Context context;
@@ -98,7 +98,7 @@ public class FavouriteTVShowFragment extends Fragment {
         @SuppressLint("Recycle") Cursor cursor = database.rawQuery("select*from tb_tvShow", null);
         cursor.moveToFirst();
 
-        if (cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             textNotFound.setVisibility(View.INVISIBLE);
         }
 

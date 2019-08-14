@@ -25,9 +25,9 @@
 
             <ImageView
                 android:id="@+id/poster_path_movie"
-                android:background="#fff"
                 android:layout_width="75dp"
                 android:layout_height="100dp"
+                android:background="#fff"
                 tools:ignore="ContentDescription" />
 
             <TextView

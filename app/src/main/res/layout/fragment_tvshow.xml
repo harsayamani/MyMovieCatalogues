@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.tvshows.TVShowFragment">
+    tools:context=".fragments.tvshows.TvShowFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v4.view.ViewPager
@@ -40,6 +40,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/favourite_lists" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/search" />
 
     </android.support.design.widget.TabLayout>
 

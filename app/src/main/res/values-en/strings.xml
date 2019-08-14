@@ -40,4 +40,12 @@
     <string name="exit_message">You want to exit, are you sure?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="search">Search</string>
+    <string name="notification">Notification</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="daily_text">My Movie Catalogues is update!</string>
+    <string name="setting">Settings</string>
+    <string name="language">Change Languange</string>
+    <string name="release_text">Release Today!</string>
 </resources>

@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.model.Movie;
 import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavMovies;
 
@@ -51,7 +50,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         voteCountMovie = findViewById(R.id.vote_count);
         releaseDateMovie = findViewById(R.id.release_date);
         ilustMovie = findViewById(R.id.ilust);
-        dbFavMovies= new DbFavMovies(this);
+        dbFavMovies = new DbFavMovies(this);
         opMenu = findViewById(R.id.unfavorite);
         progressDialog = new ProgressDialog(this);
     }
@@ -74,11 +73,72 @@ public class DetailMovieActivity extends AppCompatActivity {
                 voteAverageMovie.setText("" + movie.getVote_average() + "/10");
                 voteCountMovie.setText("" + movie.getVote_count());
                 releaseDateMovie.setText("" + movie.getRelease_date());
-                new DownloadImage(ilustMovie).execute(BuildConfig.IMG_URL+movie.getPoster_path());
+                new DownloadImage(ilustMovie).execute(BuildConfig.IMG_URL + movie.getPoster_path());
 
                 progressDialog.dismiss();
             }
         }, 1000);
+    }
+
+    private Cursor getFavorite() {
+        Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        SQLiteDatabase database = dbFavMovies.getReadableDatabase();
+        Cursor cursor = database.rawQuery("select * from tb_movie where id = '" + movie.getId() + "'", null);
+        cursor.moveToFirst();
+
+        return cursor;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (getFavorite().getCount() > 0) {
+            getMenuInflater().inflate(R.menu.favorite, menu);
+        } else if (getFavorite().getCount() < 1) {
+            getMenuInflater().inflate(R.menu.unfavorite, menu);
+        }
+
+        this.opMenu = menu;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        String messageInsert = getString(R.string.message_add_favorite);
+        String messageDelete = getString(R.string.message_delete_favorite);
+
+        if (item.getItemId() == R.id.unfavorite) {
+            if (getFavorite().getCount() < 1) {
+                dbFavMovies.insertFavMovie(movie.getId(), movie.getTitle(), movie.getPoster_path(),
+                        movie.getRelease_date(), movie.getOverview(), movie.getPopularity(),
+                        movie.getVote_average(), movie.getVote_count());
+                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp));
+
+                Toast.makeText(this, messageInsert, Toast.LENGTH_SHORT).show();
+            } else if (getFavorite().getCount() > 0) {
+                dbFavMovies.deleteFavMovie(String.valueOf(getFavorite().getInt(0)));
+                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_24dp));
+
+                Toast.makeText(this, messageDelete, Toast.LENGTH_SHORT).show();
+            }
+        } else if (item.getItemId() == R.id.favorite) {
+            if (getFavorite().getCount() > 0) {
+                dbFavMovies.deleteFavMovie(String.valueOf(getFavorite().getInt(0)));
+                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_24dp));
+
+                Toast.makeText(this, messageDelete, Toast.LENGTH_SHORT).show();
+            } else if (getFavorite().getCount() < 1) {
+                dbFavMovies.insertFavMovie(movie.getId(), movie.getTitle(), movie.getPoster_path(),
+                        movie.getRelease_date(), movie.getOverview(), movie.getPopularity(),
+                        movie.getVote_average(), movie.getVote_count());
+                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp));
+
+                Toast.makeText(this, messageInsert, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -107,67 +167,5 @@ public class DetailMovieActivity extends AppCompatActivity {
             Drawable drawable = new BitmapDrawable(getResources(), result);
             constraintLayout.setBackground(drawable);
         }
-    }
-
-    private Cursor getFavorite(){
-        Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
-        SQLiteDatabase database = dbFavMovies.getReadableDatabase();
-        Cursor cursor = database.rawQuery("select * from tb_movie where id = '"+movie.getId()+"'", null);
-        cursor.moveToFirst();
-
-        return  cursor;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        if (getFavorite().getCount()>0){
-            getMenuInflater().inflate(R.menu.favorite, menu);
-        }else if (getFavorite().getCount()<1){
-            getMenuInflater().inflate(R.menu.unfavorite, menu);
-        }
-
-        this.opMenu = menu;
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Movie movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
-        String messageInsert = getString(R.string.message_add_favorite);
-        String messageDelete = getString(R.string.message_delete_favorite);
-
-        if (item.getItemId() == R.id.unfavorite) {
-            if (getFavorite().getCount() < 1) {
-                dbFavMovies.insertFavMovie(movie.getId(),movie.getTitle(), movie.getPoster_path(),
-                        movie.getRelease_date(), movie.getOverview(), movie.getPopularity(),
-                        movie.getVote_average(), movie.getVote_count());
-                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp));
-
-                Toast.makeText(this, messageInsert, Toast.LENGTH_SHORT).show();
-            } else if (getFavorite().getCount() > 0) {
-                dbFavMovies.deleteFavMovie(String.valueOf(getFavorite().getInt(0)));
-                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_24dp));
-
-                Toast.makeText(this, messageDelete, Toast.LENGTH_SHORT).show();
-            }
-        }
-        else if (item.getItemId() == R.id.favorite) {
-            if (getFavorite().getCount() > 0){
-                dbFavMovies.deleteFavMovie(String.valueOf(getFavorite().getInt(0)));
-                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white_24dp));
-
-                Toast.makeText(this, messageDelete, Toast.LENGTH_SHORT).show();
-            }else if (getFavorite().getCount() < 1){
-                dbFavMovies.insertFavMovie(movie.getId(), movie.getTitle(), movie.getPoster_path(),
-                        movie.getRelease_date(), movie.getOverview(), movie.getPopularity(),
-                        movie.getVote_average(), movie.getVote_count());
-                opMenu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white_24dp));
-
-                Toast.makeText(this, messageInsert, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

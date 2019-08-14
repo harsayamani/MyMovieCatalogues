@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.mobile.harsoft.mymoviecatalogues.fragments.movies.FavouriteMoviesFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.movies.SearchMovieFragment;
 import com.mobile.harsoft.mymoviecatalogues.fragments.movies.UpcomingMoviesFragment;
 
 public class MoviePagerAdapter extends FragmentStatePagerAdapter {
@@ -23,6 +24,8 @@ public class MoviePagerAdapter extends FragmentStatePagerAdapter {
                 return new UpcomingMoviesFragment();
             case 1:
                 return new FavouriteMoviesFragment();
+            case 2:
+                return new SearchMovieFragment();
             default:
                 return null;
         }

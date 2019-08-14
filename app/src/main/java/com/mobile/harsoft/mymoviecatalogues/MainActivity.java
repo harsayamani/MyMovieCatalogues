@@ -17,12 +17,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.mobile.harsoft.mymoviecatalogues.fragments.movies.MoviesFragment;
-import com.mobile.harsoft.mymoviecatalogues.fragments.tvshows.TVShowFragment;
+import com.mobile.harsoft.mymoviecatalogues.fragments.tvshows.TvShowFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private MoviesFragment moviesFragment;
-    private TVShowFragment tvShowFragment;
+    private TvShowFragment tvShowFragment;
     private int navTab = 1;
     private FragmentManager fragmentManager;
     private BottomNavigationView navigation;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     navTab = 1;
                     break;
                 case R.id.tvshow:
-                    fragment = new TVShowFragment();
+                    fragment = new TvShowFragment();
                     navTab = 2;
                     break;
             }
@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
             if (fragment instanceof MoviesFragment) {
                 moviesFragment = (MoviesFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 1;
-            } else if (fragment instanceof TVShowFragment) {
-                tvShowFragment = (TVShowFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+            } else if (fragment instanceof TvShowFragment) {
+                tvShowFragment = (TvShowFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
                 navTab = 2;
             }
         } else {
@@ -73,14 +73,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.languages, menu);
+        inflater.inflate(R.menu.settings, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.tranlate) {
+        if (item.getItemId() == R.id.translate) {
             startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+        } else if (item.getItemId() == R.id.settings) {
+            startActivity(new Intent(this, SettingActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         moviesFragment = new MoviesFragment();
-        tvShowFragment = new TVShowFragment();
+        tvShowFragment = new TvShowFragment();
         fragmentManager = getSupportFragmentManager();
         navigation = findViewById(R.id.navigation);
 
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null).replace(R.id.fl_container, moviesFragment, MoviesFragment.class.getSimpleName());
                 break;
             case 2:
-                fragmentTransaction.addToBackStack(null).replace(R.id.fl_container, tvShowFragment, TVShowFragment.class.getSimpleName());
+                fragmentTransaction.addToBackStack(null).replace(R.id.fl_container, tvShowFragment, TvShowFragment.class.getSimpleName());
         }
         fragmentTransaction.commit();
     }

@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mobile.harsoft.mymoviecatalogues.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.DetailTvShowActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
 
 import java.io.InputStream;
@@ -53,7 +53,7 @@ public class TvShowRecyclerAdapter extends RecyclerView.Adapter<TvShowRecyclerAd
             country.append(s).append(" ");
         }
 
-        new DownloadImage(viewHolder.posterPathShow).execute(BuildConfig.IMG_URL+poster_path);
+        new DownloadImage(viewHolder.posterPathShow).execute(BuildConfig.IMG_URL + poster_path);
         viewHolder.nameShow.setText(name);
         viewHolder.originCountryShow.setText(country.toString());
 

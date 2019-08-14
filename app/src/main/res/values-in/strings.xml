@@ -40,4 +40,12 @@
     <string name="exit_message">Apakah kamu yakin ingin keluar?</string>
     <string name="yes">YA</string>
     <string name="no">TIDAK</string>
+    <string name="search">Cari</string>
+    <string name="notification">Notifikasi</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="release_reminder">Pengingat Rilis</string>
+    <string name="daily_text">Katalog Filmku telah diperbaharui!</string>
+    <string name="setting">Pengaturan</string>
+    <string name="language">Ganti Bahasa</string>
+    <string name="release_text">Rilis Hari Ini!</string>
 </resources>

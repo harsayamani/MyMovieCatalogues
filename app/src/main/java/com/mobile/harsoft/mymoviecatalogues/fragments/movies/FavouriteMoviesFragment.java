@@ -1,6 +1,5 @@
 package com.mobile.harsoft.mymoviecatalogues.fragments.movies;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
@@ -98,7 +97,7 @@ public class FavouriteMoviesFragment extends Fragment {
         @SuppressLint("Recycle") Cursor cursor = database.rawQuery("select*from tb_movie", null);
         cursor.moveToFirst();
 
-        if (cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             textNotFound.setVisibility(View.INVISIBLE);
         }
 

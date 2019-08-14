@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
 import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavTvShows;
 
@@ -96,34 +95,6 @@ public class DetailTvShowActivity extends AppCompatActivity {
         return cursor;
     }
 
-    @SuppressLint("StaticFieldLeak")
-    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
-        @SuppressLint("StaticFieldLeak")
-        ConstraintLayout constraintLayout;
-
-        DownloadImage(ConstraintLayout constraintLayout) {
-            this.constraintLayout = constraintLayout;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urlOfImage = urls[0];
-            Bitmap logo = null;
-            try {
-                InputStream is = new URL(urlOfImage).openStream();
-
-                logo = BitmapFactory.decodeStream(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return logo;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            Drawable drawable = new BitmapDrawable(getResources(), result);
-            constraintLayout.setBackground(drawable);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -179,5 +150,33 @@ public class DetailTvShowActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        @SuppressLint("StaticFieldLeak")
+        ConstraintLayout constraintLayout;
+
+        DownloadImage(ConstraintLayout constraintLayout) {
+            this.constraintLayout = constraintLayout;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urlOfImage = urls[0];
+            Bitmap logo = null;
+            try {
+                InputStream is = new URL(urlOfImage).openStream();
+
+                logo = BitmapFactory.decodeStream(is);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return logo;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            Drawable drawable = new BitmapDrawable(getResources(), result);
+            constraintLayout.setBackground(drawable);
+        }
     }
 }

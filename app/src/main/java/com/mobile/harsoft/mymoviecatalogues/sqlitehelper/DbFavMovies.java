@@ -25,8 +25,8 @@ public class DbFavMovies extends SQLiteOpenHelper {
     }
 
     public void insertFavMovie(int id, String title, String poster_path, String release_date,
-                                String overview, double popularity, double vote_average,
-                                int vote_count){
+                               String overview, double popularity, double vote_average,
+                               int vote_count) {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -42,7 +42,7 @@ public class DbFavMovies extends SQLiteOpenHelper {
         db.insert("tb_movie", null, values);
     }
 
-    public void deleteFavMovie(String id){
+    public void deleteFavMovie(String id) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("tb_movie", "ID=?", new String[]{id});
     }

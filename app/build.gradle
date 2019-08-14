@@ -5,11 +5,17 @@ android {
     defaultConfig {
         applicationId "com.mobile.harsoft.mymoviecatalogues"
         minSdkVersion 16
-        //noinspection OldTargetApi
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_KEY", '"b790a953494065f9a95eac03708eb7e9"'
+        buildConfigField "String", "BASE_URL", '"https://api.themoviedb.org/3/"'
+        buildConfigField "String", "IMG_URL", '"https://image.tmdb.org/t/p/w185"'
+        buildConfigField "String", "LANGUAGE", '"en-US"'
+
+
     }
     buildTypes {
         release {

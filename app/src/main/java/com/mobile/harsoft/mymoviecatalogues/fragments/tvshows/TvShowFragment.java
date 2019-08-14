@@ -12,17 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.adapter.TVShowPagerAdapter;
+import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowPagerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TVShowFragment extends Fragment {
+public class TvShowFragment extends Fragment {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
-    public TVShowFragment() {
+    public TvShowFragment() {
         // Required empty public constructor
     }
 
@@ -41,7 +41,7 @@ public class TVShowFragment extends Fragment {
 
     private void tabLayout() {
         FragmentManager fragmentManager = getChildFragmentManager();
-        TVShowPagerAdapter tvShowPagerAdapter = new TVShowPagerAdapter(fragmentManager, tabLayout.getTabCount());
+        TvShowPagerAdapter tvShowPagerAdapter = new TvShowPagerAdapter(fragmentManager, tabLayout.getTabCount());
         viewPager.setAdapter(tvShowPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

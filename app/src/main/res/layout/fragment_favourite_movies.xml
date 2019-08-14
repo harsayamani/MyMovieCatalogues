@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.movies.FavouriteMoviesFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,19 +19,22 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                tools:listitem="@layout/design_movie" />
+
             <TextView
                 android:id="@+id/text"
-                android:textSize="17sp"
-                android:textAllCaps="true"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/data_not_found"/>
+                android:layout_centerInParent="true"
+                android:text="@string/data_not_found"
+                android:textAllCaps="true"
+                android:textSize="17sp" />
         </RelativeLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>

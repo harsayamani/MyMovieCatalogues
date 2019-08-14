@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mobile.harsoft.mymoviecatalogues.model.Movie;
+import com.mobile.harsoft.mymoviecatalogues.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.DetailMovieActivity;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.model.Movie;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -53,7 +53,7 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
         String poster_path = movies.get(i).getPoster_path();
         double vote_average = movies.get(i).getVote_average();
 
-        new DownloadImage(viewHolder.ilustMovie).execute(BuildConfig.IMG_URL+poster_path);
+        new DownloadImage(viewHolder.ilustMovie).execute(BuildConfig.IMG_URL + poster_path);
         viewHolder.titleMovie.setText(title);
         viewHolder.rateMovie.setText(vote_average + "");
         viewHolder.popularityMovie.setText(popularity + "");

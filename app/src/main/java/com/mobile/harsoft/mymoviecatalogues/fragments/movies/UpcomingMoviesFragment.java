@@ -20,10 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mobile.harsoft.mymoviecatalogues.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.adapter.MovieRecyclerAdapter;
 import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.model.Movie;
 import com.mobile.harsoft.mymoviecatalogues.response.ResultMovie;
 

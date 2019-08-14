@@ -21,12 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowRecyclerAdapter;
-import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.R;
-import com.mobile.harsoft.mymoviecatalogues.response.ResultTV;
+import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowRecyclerAdapter;
 import com.mobile.harsoft.mymoviecatalogues.api.APIClient;
-import com.mobile.harsoft.mymoviecatalogues.api.BuildConfig;
+import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
+import com.mobile.harsoft.mymoviecatalogues.response.ResultTv;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,16 +38,16 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TVAiringTodayFragment extends Fragment {
+public class TvAiringTodayFragment extends Fragment {
 
     private TvShowRecyclerAdapter adapter;
     private ArrayList<TvShow> tvShows;
     private RecyclerView recyclerView;
-    private ResultTV resultTV;
+    private ResultTv resultTV;
     private Context context;
     private SwipeRefreshLayout refreshLayout;
 
-    public TVAiringTodayFragment() {
+    public TvAiringTodayFragment() {
         // Required empty public constructor
     }
 
@@ -89,13 +89,13 @@ public class TVAiringTodayFragment extends Fragment {
                     @Override
                     public void run() {
                         refreshLayout.setRefreshing(false);
-                        Call<ResultTV> call = APIClient.getInstance()
+                        Call<ResultTv> call = APIClient.getInstance()
                                 .baseAPI()
                                 .getTvAiringToday(BuildConfig.API_KEY, BuildConfig.LANGUAGE, 1);
 
-                        call.enqueue(new Callback<ResultTV>() {
+                        call.enqueue(new Callback<ResultTv>() {
                             @Override
-                            public void onResponse(@NonNull Call<ResultTV> call, @NonNull Response<ResultTV> response) {
+                            public void onResponse(@NonNull Call<ResultTv> call, @NonNull Response<ResultTv> response) {
                                 resultTV = response.body();
                                 assert resultTV != null;
                                 tvShows = new ArrayList<>(Arrays.asList(resultTV.getTvShows()));
@@ -105,7 +105,7 @@ public class TVAiringTodayFragment extends Fragment {
                             }
 
                             @Override
-                            public void onFailure(@NonNull Call<ResultTV> call, @NonNull Throwable t) {
+                            public void onFailure(@NonNull Call<ResultTv> call, @NonNull Throwable t) {
                                 Toast.makeText(context, "Data Doesn't Load", Toast.LENGTH_SHORT).show();
                                 Log.e("Error : ", t.toString());
                             }
@@ -124,13 +124,13 @@ public class TVAiringTodayFragment extends Fragment {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        Call<ResultTV> call = APIClient.getInstance()
+        Call<ResultTv> call = APIClient.getInstance()
                 .baseAPI()
                 .getTvAiringToday(BuildConfig.API_KEY, BuildConfig.LANGUAGE, 1);
 
-        call.enqueue(new Callback<ResultTV>() {
+        call.enqueue(new Callback<ResultTv>() {
             @Override
-            public void onResponse(@NonNull Call<ResultTV> call, @NonNull Response<ResultTV> response) {
+            public void onResponse(@NonNull Call<ResultTv> call, @NonNull Response<ResultTv> response) {
                 resultTV = response.body();
                 assert resultTV != null;
                 tvShows = new ArrayList<>(Arrays.asList(resultTV.getTvShows()));
@@ -141,7 +141,7 @@ public class TVAiringTodayFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ResultTV> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResultTv> call, @NonNull Throwable t) {
                 Toast.makeText(context, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
                 Log.e("Error : ", t.toString());
                 progressDialog.dismiss();
