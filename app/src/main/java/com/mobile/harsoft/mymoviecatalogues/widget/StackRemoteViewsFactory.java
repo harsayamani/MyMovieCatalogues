@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mobile.harsoft.mymoviecatalogues.BuildConfig;
 import com.mobile.harsoft.mymoviecatalogues.R;
+import com.mobile.harsoft.mymoviecatalogues.database.DbFavMovies;
 import com.mobile.harsoft.mymoviecatalogues.model.Movie;
-import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavMovies;
 
 import java.util.ArrayList;
 import java.util.List;

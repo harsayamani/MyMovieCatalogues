@@ -95,25 +95,6 @@ public class MovieRecyclerAdapter extends RecyclerView.Adapter<MovieRecyclerAdap
             popularityMovie = itemView.findViewById(R.id.popularity_movie);
             rateMovie = itemView.findViewById(R.id.vote_average_movie);
             ilustMovie = itemView.findViewById(R.id.poster_path_movie);
-
-//            constraintLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Movie movie = new Movie();
-//                    movie.setId(movies.get(getAdapterPosition()).getId());
-//                    movie.setTitle(movies.get(getAdapterPosition()).getTitle());
-//                    movie.setOverview(movies.get(getAdapterPosition()).getOverview());
-//                    movie.setPoster_path(movies.get(getAdapterPosition()).getPoster_path());
-//                    movie.setRelease_date(movies.get(getAdapterPosition()).getRelease_date());
-//                    movie.setVote_average(movies.get(getAdapterPosition()).getVote_average());
-//                    movie.setVote_count(movies.get(getAdapterPosition()).getVote_count());
-//                    movie.setGenre_ids(movies.get(getAdapterPosition()).getGenre_ids());
-//                    movie.setPopularity(movies.get(getAdapterPosition()).getPopularity());
-//                    Intent intent = new Intent(context, DetailMovieActivity.class);
-//                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie);
-//                    context.startActivity(intent);
-//                }
-//            });
         }
     }
 }

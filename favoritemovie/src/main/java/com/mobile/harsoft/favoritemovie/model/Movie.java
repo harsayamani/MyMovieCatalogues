@@ -1,20 +1,7 @@
 package com.mobile.harsoft.favoritemovie.model;
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.ID;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.OVERVIEW;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.POPULARITY;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.POSTER_PATH;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.RELEASE_DATE;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.TITLE;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.VOTE_AVERAGE;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.MovieColumns.VOTE_COUNT;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.getColumnDouble;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.getColumnInt;
-import static com.mobile.harsoft.favoritemovie.database.DatabaseContract.getColumnString;
 
 public class Movie implements Parcelable {
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
@@ -41,17 +28,6 @@ public class Movie implements Parcelable {
 
     }
 
-    public Movie(Cursor cursor) {
-        this.id = getColumnInt(cursor, ID);
-        this.title = getColumnString(cursor, TITLE);
-        this.overview = getColumnString(cursor, OVERVIEW);
-        this.poster_path = getColumnString(cursor, POSTER_PATH);
-        this.popularity = getColumnDouble(cursor, POPULARITY);
-        this.release_date = getColumnString(cursor, RELEASE_DATE);
-        this.vote_average = getColumnDouble(cursor, VOTE_AVERAGE);
-        this.vote_count = getColumnInt(cursor, VOTE_COUNT);
-    }
-
     private Movie(Parcel in) {
         this.id = in.readInt();
         this.title = in.readString();
@@ -61,10 +37,6 @@ public class Movie implements Parcelable {
         this.vote_average = in.readDouble();
         this.vote_count = in.readInt();
         this.popularity = in.readDouble();
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -79,10 +51,6 @@ public class Movie implements Parcelable {
         this.title = title;
     }
 
-    public String getOverview() {
-        return overview;
-    }
-
     public void setOverview(String overview) {
         this.overview = overview;
     }
@@ -95,10 +63,6 @@ public class Movie implements Parcelable {
         this.poster_path = poster_path;
     }
 
-    public String getRelease_date() {
-        return release_date;
-    }
-
     public void setRelease_date(String release_date) {
         this.release_date = release_date;
     }
@@ -109,10 +73,6 @@ public class Movie implements Parcelable {
 
     public void setVote_average(double vote_average) {
         this.vote_average = vote_average;
-    }
-
-    public int getVote_count() {
-        return vote_count;
     }
 
     public void setVote_count(int vote_count) {

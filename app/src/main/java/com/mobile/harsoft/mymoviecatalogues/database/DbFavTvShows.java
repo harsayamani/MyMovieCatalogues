@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.sqlitehelper;
+package com.mobile.harsoft.mymoviecatalogues.database;
 
 import android.content.ContentValues;
 import android.content.Context;

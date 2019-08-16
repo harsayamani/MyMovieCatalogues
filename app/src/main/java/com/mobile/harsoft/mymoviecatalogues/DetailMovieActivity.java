@@ -19,8 +19,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mobile.harsoft.mymoviecatalogues.database.DbFavMovies;
 import com.mobile.harsoft.mymoviecatalogues.model.Movie;
-import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavMovies;
 
 import java.io.InputStream;
 import java.net.URL;

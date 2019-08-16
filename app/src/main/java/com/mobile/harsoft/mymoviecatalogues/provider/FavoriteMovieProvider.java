@@ -8,11 +8,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.FavoriteMovieHelper;
+import com.mobile.harsoft.mymoviecatalogues.database.FavoriteMovieHelper;
 
-import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.AUTHORITY;
-import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.CONTENT_URI;
-import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.TABLE_NAME;
+import static com.mobile.harsoft.mymoviecatalogues.database.DatabaseContract.AUTHORITY;
+import static com.mobile.harsoft.mymoviecatalogues.database.DatabaseContract.MovieColumns.CONTENT_URI;
+import static com.mobile.harsoft.mymoviecatalogues.database.DatabaseContract.MovieColumns.TABLE_NAME;
 
 @SuppressLint("Registered")
 public class FavoriteMovieProvider extends ContentProvider {

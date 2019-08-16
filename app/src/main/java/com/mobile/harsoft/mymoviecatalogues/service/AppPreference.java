@@ -6,14 +6,12 @@ import android.preference.PreferenceManager;
 
 public class AppPreference {
     private SharedPreferences sharedPreferences;
-    private Context context;
 
     private String KEY_DAILY = "daily";
     private String KEY_RELEASE = "release";
 
     public AppPreference(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        this.context = context;
     }
 
     public Boolean getDailyReminderMovie() {

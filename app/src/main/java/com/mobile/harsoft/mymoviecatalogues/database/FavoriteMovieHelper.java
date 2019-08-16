@@ -1,4 +1,4 @@
-package com.mobile.harsoft.mymoviecatalogues.sqlitehelper;
+package com.mobile.harsoft.mymoviecatalogues.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.ID;
-import static com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DatabaseContract.MovieColumns.TABLE_NAME;
+import static com.mobile.harsoft.mymoviecatalogues.database.DatabaseContract.MovieColumns.ID;
+import static com.mobile.harsoft.mymoviecatalogues.database.DatabaseContract.MovieColumns.TABLE_NAME;
 
 public class FavoriteMovieHelper {
 

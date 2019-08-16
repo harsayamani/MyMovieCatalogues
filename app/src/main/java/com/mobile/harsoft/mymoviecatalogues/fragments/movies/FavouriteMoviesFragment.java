@@ -23,8 +23,8 @@ import android.widget.TextView;
 
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.adapter.MovieRecyclerAdapter;
+import com.mobile.harsoft.mymoviecatalogues.database.DbFavMovies;
 import com.mobile.harsoft.mymoviecatalogues.model.Movie;
-import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavMovies;
 
 import java.util.ArrayList;
 

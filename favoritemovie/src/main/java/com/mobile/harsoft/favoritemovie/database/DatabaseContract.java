@@ -1,6 +1,5 @@
 package com.mobile.harsoft.favoritemovie.database;
 
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -9,18 +8,6 @@ public class DatabaseContract {
     private static final String SCHEME = "content";
 
     public DatabaseContract() {
-    }
-
-    public static String getColumnString(Cursor cursor, String columnName) {
-        return cursor.getString(cursor.getColumnIndex(columnName));
-    }
-
-    public static int getColumnInt(Cursor cursor, String columnName) {
-        return cursor.getInt(cursor.getColumnIndex(columnName));
-    }
-
-    public static double getColumnDouble(Cursor cursor, String columnName) {
-        return cursor.getDouble(cursor.getColumnIndex(columnName));
     }
 
     public static final class MovieColumns implements BaseColumns {

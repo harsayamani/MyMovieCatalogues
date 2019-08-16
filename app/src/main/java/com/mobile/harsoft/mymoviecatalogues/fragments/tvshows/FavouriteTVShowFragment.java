@@ -24,8 +24,8 @@ import android.widget.TextView;
 
 import com.mobile.harsoft.mymoviecatalogues.R;
 import com.mobile.harsoft.mymoviecatalogues.adapter.TvShowRecyclerAdapter;
+import com.mobile.harsoft.mymoviecatalogues.database.DbFavTvShows;
 import com.mobile.harsoft.mymoviecatalogues.model.TvShow;
-import com.mobile.harsoft.mymoviecatalogues.sqlitehelper.DbFavTvShows;
 
 import java.util.ArrayList;
 
